@@ -1,5 +1,3 @@
-# HANDOFF.md
-
 ## Project Overview
 
 **Project:** Niche Clothing Brand  

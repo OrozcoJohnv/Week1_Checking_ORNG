@@ -1,313 +1,231 @@
 :root {
-    /*Color palette*/
-    --color-bg: #f7e8ca;
-    /* ivory page background */
-    --color-surface: #f0eee6;
-    /* cards, panels */
-    --color-line: #e8e6dc;
-    /* soft dividers */
-    --color-ink: #141413;
-    /* main text, pixel borders */
-    --color-muted: #87867f;
-    /* secondary text */
-    --color-accent: #d97757;
-    /* warm orange: buttons, highlights */
-    --color-accent-strong: #c15f3c;
-    /* hover / pressed state */
-    --color-nav-bg: #141413;
-    /* dark navigation bar */
-    --color-nav-text: #faf9f5;
-    /* text on the dark bar */
-
-    /*Typography*/
-    --font-pixel: "Pixelify Sans", "Courier New", monospace;
-    /* headings, nav, buttons */
-    --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-    /* readable text */
-
-    --text-xs: 0.8rem;
-    --text-sm: 0.9rem;
-    --text-base: 1rem;
-    --text-lg: 1.25rem;
-    --text-xl: 1.563rem;
-    --text-2xl: 1.953rem;
-    --text-3xl: 2.441rem;
-
-    --weight-regular: 400;
-    --weight-bold: 700;
-    --line-height-body: 1.6;
-    --line-height-heading: 1.2;
-
-    /*Layout system*/
-    --container-max: 1100px;
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 1rem;
-    --space-4: 1.5rem;
-    --space-5: 2.5rem;
-    --space-6: 4rem;
-    --header-height: 4rem;
-
-    /*Pixel look*/
-    --border-width: 3px;
-    /* chunky pixel borders */
-    --radius: 0;
-    /* square corners */
-    --shadow-pixel: 4px 4px 0 var(--color-ink);
-
-    /*  Layering  */
-    --z-header: 100;
+    --bg: #f7e8ca;
+    --card: #fffaf0;
+    --ink: #141413;
+    --orange: #d97757;
+    --dark: #c15f3c;
+    --header: #141413
 }
 
-/*Base*/
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+* {
+    box-sizing: border-box
 }
 
 html {
     scroll-behavior: smooth;
-    /* keeps a section's top from hiding under the sticky header after a nav jump */
-    scroll-padding-top: var(--header-height);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
+    scroll-padding-top: 70px
 }
 
 body {
     margin: 0;
-    background: var(--color-bg);
-    color: var(--color-ink);
-    font-family: var(--font-body);
-    font-size: var(--text-base);
-    line-height: var(--line-height-body);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
+    line-height: 1.6
 }
 
 h1,
 h2,
-h3 {
-    font-family: var(--font-pixel);
-    line-height: var(--line-height-heading);
+h3,
+nav,
+.brand,
+.button,
+.eyebrow {
+    font-family: "Pixelify Sans", "Courier New", monospace
 }
 
-:focus-visible {
-    outline: var(--border-width) solid var(--color-accent);
-    outline-offset: 2px;
+h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.05;
+    margin: 10px 0 18px
 }
 
-/*Sticky header: stays on screen while scrolling*/
+h2 {
+    font-size: 2rem
+}
+
 .site-header {
     position: sticky;
     top: 0;
-    z-index: var(--z-header);
-    height: var(--header-height);
-    background: var(--color-nav-bg);
-    color: var(--color-nav-text);
-    border-bottom: var(--border-width) solid var(--color-accent);
+    z-index: 10;
+    background: var(--header);
+    border-bottom: 3px solid var(--orange)
 }
 
-.site-header__inner {
+.header-inner {
+    max-width: 1100px;
+    min-height: 68px;
+    margin: auto;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-3);
-    max-width: var(--container-max);
-    height: 100%;
-    margin: 0 auto;
-    padding: 0 var(--space-3);
+    gap: 20px
 }
 
-.brand {
-    font-family: var(--font-pixel);
-    font-size: var(--text-lg);
-    color: var(--color-accent);
-    text-decoration: none;
-}
-
-.nav-list {
-    display: flex;
-    gap: var(--space-3);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.nav-list a {
-    font-family: var(--font-pixel);
-    font-size: var(--text-base);
-    color: var(--color-nav-text);
-    text-decoration: none;
-}
-
-.nav-list a:hover {
-    color: var(--color-accent);
-}
-
-@media (max-width: 600px) {
-    .brand {
-        display: none;
-    }
-
-    .site-header__inner {
-        justify-content: center;
-    }
-
-    .nav-list {
-        gap: var(--space-2);
-    }
-
-    .nav-list a {
-        font-size: var(--text-sm);
-    }
-}
-
-/*TEMPORARY: lets you test sticky header + nav jumps. Remove in Week 2 */
-main section {
-    min-height: 80vh;
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: var(--space-5) var(--space-3);
-}
-
-/*Brand logo */
 .brand {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
+    color: var(--orange);
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 700
 }
 
-.brand-mark {
-    display: inline-grid;
-    place-items: center;
-    width: 28px;
-    height: 28px;
-    background: var(--color-accent);
-    color: var(--color-ink);
-    border: 2px solid var(--color-ink);
-    border-radius: 50%;
-    font-family: var(--font-pixel);
-    font-size: var(--text-sm);
+.brand img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    image-rendering: pixelated
 }
 
-/*Simple page content*/
-main section {
+nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: flex-end
+}
+
+nav a {
+    color: white;
+    text-decoration: none
+}
+
+nav a:hover {
+    color: var(--orange)
+}
+
+main {
+    max-width: 1100px;
+    margin: auto
+}
+
+section {
     min-height: 80vh;
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: var(--space-6) var(--space-3);
+    padding: 70px 20px;
+    scroll-margin-top: 68px
 }
 
 .hero {
+    min-height: calc(100vh - 68px);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr .8fr;
     align-items: center;
-    gap: var(--space-6);
+    gap: 50px
 }
 
-.hero h1 {
-    max-width: 600px;
-    font-size: var(--text-3xl);
-}
-
-.hero p {
-    max-width: 560px;
+.hero-image {
+    width: 100%;
+    max-width: 390px;
+    justify-self: center;
+    image-rendering: pixelated
 }
 
 .eyebrow {
-    font-family: var(--font-pixel);
+    color: var(--dark);
     font-weight: 700;
-}
-
-.hero-box,
-.product-art {
-    display: grid;
-    place-items: center;
-    background: var(--color-surface);
-    border: var(--border-width) solid var(--color-ink);
-    box-shadow: var(--shadow-pixel);
-    font-family: var(--font-pixel);
-    text-align: center;
-}
-
-.hero-box {
-    min-height: 360px;
-    font-size: var(--text-2xl);
+    letter-spacing: 1px
 }
 
 .button {
     display: inline-block;
-    margin-top: var(--space-3);
-    padding: 0.7rem 1.2rem;
-    background: var(--color-accent);
-    color: var(--color-ink);
-    border: var(--border-width) solid var(--color-ink);
-    box-shadow: var(--shadow-pixel);
-    font-family: var(--font-pixel);
-    text-decoration: none;
+    margin-top: 12px;
+    padding: 10px 18px;
+    background: var(--orange);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    text-decoration: none
 }
 
 .button:hover {
-    background: var(--color-accent-strong);
+    background: var(--dark)
 }
 
 .products {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
+    gap: 24px;
+    margin-top: 30px
 }
 
 .card {
-    padding: var(--space-3);
-    background: var(--color-surface);
-    border: var(--border-width) solid var(--color-ink);
-    box-shadow: var(--shadow-pixel);
+    background: var(--card);
+    border: 3px solid var(--ink);
+    padding: 18px;
+    box-shadow: 5px 5px 0 var(--ink)
 }
 
-.product-art {
+.card img {
+    width: 100%;
     height: 220px;
-    background: var(--color-bg);
+    object-fit: cover;
+    background: #ead9ae;
+    border: 2px solid var(--ink);
+    image-rendering: pixelated
 }
 
 .price {
-    font-family: var(--font-pixel);
-    font-weight: 700;
+    font-weight: 700
 }
 
 .collection-list {
+    margin-top: 30px;
     display: grid;
-    gap: var(--space-3);
-    max-width: 700px;
+    gap: 10px
 }
 
 .collection-list div {
     display: flex;
-    justify-content: space-between;
-    padding: var(--space-3);
-    border: 2px solid var(--color-ink);
-    background: var(--color-surface);
-    font-family: var(--font-pixel);
+    gap: 20px;
+    padding: 18px;
+    background: var(--card);
+    border: 3px solid var(--ink)
+}
+
+.collection-list strong {
+    color: var(--dark)
+}
+
+#about,
+#cart {
+    border-top: 3px solid var(--ink)
 }
 
 footer {
-    padding: var(--space-4);
-    background: var(--color-nav-bg);
-    color: var(--color-nav-text);
+    padding: 30px 20px;
     text-align: center;
-    font-family: var(--font-pixel);
+    background: var(--header);
+    color: white;
+    border-top: 3px solid var(--orange)
 }
 
-@media (max-width: 700px) {
-
-    .hero,
-    .products {
-        grid-template-columns: 1fr;
+@media(max-width:700px) {
+    .header-inner {
+        align-items: flex-start;
+        flex-direction: column
     }
 
-    .hero-box {
-        min-height: 250px;
+    nav {
+        gap: 10px
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center
+    }
+
+    .hero p {
+        margin-left: auto;
+        margin-right: auto
+    }
+
+    .products {
+        grid-template-columns: 1fr
+    }
+
+    section {
+        padding: 50px 20px
     }
 }

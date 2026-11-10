@@ -1,0 +1,313 @@
+:root {
+    /*Color palette*/
+    --color-bg: #f7e8ca;
+    /* ivory page background */
+    --color-surface: #f0eee6;
+    /* cards, panels */
+    --color-line: #e8e6dc;
+    /* soft dividers */
+    --color-ink: #141413;
+    /* main text, pixel borders */
+    --color-muted: #87867f;
+    /* secondary text */
+    --color-accent: #d97757;
+    /* warm orange: buttons, highlights */
+    --color-accent-strong: #c15f3c;
+    /* hover / pressed state */
+    --color-nav-bg: #141413;
+    /* dark navigation bar */
+    --color-nav-text: #faf9f5;
+    /* text on the dark bar */
+
+    /*Typography*/
+    --font-pixel: "Pixelify Sans", "Courier New", monospace;
+    /* headings, nav, buttons */
+    --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    /* readable text */
+
+    --text-xs: 0.8rem;
+    --text-sm: 0.9rem;
+    --text-base: 1rem;
+    --text-lg: 1.25rem;
+    --text-xl: 1.563rem;
+    --text-2xl: 1.953rem;
+    --text-3xl: 2.441rem;
+
+    --weight-regular: 400;
+    --weight-bold: 700;
+    --line-height-body: 1.6;
+    --line-height-heading: 1.2;
+
+    /*Layout system*/
+    --container-max: 1100px;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 1rem;
+    --space-4: 1.5rem;
+    --space-5: 2.5rem;
+    --space-6: 4rem;
+    --header-height: 4rem;
+
+    /*Pixel look*/
+    --border-width: 3px;
+    /* chunky pixel borders */
+    --radius: 0;
+    /* square corners */
+    --shadow-pixel: 4px 4px 0 var(--color-ink);
+
+    /*  Layering  */
+    --z-header: 100;
+}
+
+/*Base*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* keeps a section's top from hiding under the sticky header after a nav jump */
+    scroll-padding-top: var(--header-height);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--line-height-body);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-pixel);
+    line-height: var(--line-height-heading);
+}
+
+:focus-visible {
+    outline: var(--border-width) solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/*Sticky header: stays on screen while scrolling*/
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    height: var(--header-height);
+    background: var(--color-nav-bg);
+    color: var(--color-nav-text);
+    border-bottom: var(--border-width) solid var(--color-accent);
+}
+
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    max-width: var(--container-max);
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+}
+
+.brand {
+    font-family: var(--font-pixel);
+    font-size: var(--text-lg);
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.nav-list {
+    display: flex;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-list a {
+    font-family: var(--font-pixel);
+    font-size: var(--text-base);
+    color: var(--color-nav-text);
+    text-decoration: none;
+}
+
+.nav-list a:hover {
+    color: var(--color-accent);
+}
+
+@media (max-width: 600px) {
+    .brand {
+        display: none;
+    }
+
+    .site-header__inner {
+        justify-content: center;
+    }
+
+    .nav-list {
+        gap: var(--space-2);
+    }
+
+    .nav-list a {
+        font-size: var(--text-sm);
+    }
+}
+
+/*TEMPORARY: lets you test sticky header + nav jumps. Remove in Week 2 */
+main section {
+    min-height: 80vh;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--space-5) var(--space-3);
+}
+
+/*Brand logo */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.brand-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    background: var(--color-accent);
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+    border-radius: 50%;
+    font-family: var(--font-pixel);
+    font-size: var(--text-sm);
+}
+
+/*Simple page content*/
+main section {
+    min-height: 80vh;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--space-6) var(--space-3);
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--space-6);
+}
+
+.hero h1 {
+    max-width: 600px;
+    font-size: var(--text-3xl);
+}
+
+.hero p {
+    max-width: 560px;
+}
+
+.eyebrow {
+    font-family: var(--font-pixel);
+    font-weight: 700;
+}
+
+.hero-box,
+.product-art {
+    display: grid;
+    place-items: center;
+    background: var(--color-surface);
+    border: var(--border-width) solid var(--color-ink);
+    box-shadow: var(--shadow-pixel);
+    font-family: var(--font-pixel);
+    text-align: center;
+}
+
+.hero-box {
+    min-height: 360px;
+    font-size: var(--text-2xl);
+}
+
+.button {
+    display: inline-block;
+    margin-top: var(--space-3);
+    padding: 0.7rem 1.2rem;
+    background: var(--color-accent);
+    color: var(--color-ink);
+    border: var(--border-width) solid var(--color-ink);
+    box-shadow: var(--shadow-pixel);
+    font-family: var(--font-pixel);
+    text-decoration: none;
+}
+
+.button:hover {
+    background: var(--color-accent-strong);
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+}
+
+.card {
+    padding: var(--space-3);
+    background: var(--color-surface);
+    border: var(--border-width) solid var(--color-ink);
+    box-shadow: var(--shadow-pixel);
+}
+
+.product-art {
+    height: 220px;
+    background: var(--color-bg);
+}
+
+.price {
+    font-family: var(--font-pixel);
+    font-weight: 700;
+}
+
+.collection-list {
+    display: grid;
+    gap: var(--space-3);
+    max-width: 700px;
+}
+
+.collection-list div {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-3);
+    border: 2px solid var(--color-ink);
+    background: var(--color-surface);
+    font-family: var(--font-pixel);
+}
+
+footer {
+    padding: var(--space-4);
+    background: var(--color-nav-bg);
+    color: var(--color-nav-text);
+    text-align: center;
+    font-family: var(--font-pixel);
+}
+
+@media (max-width: 700px) {
+
+    .hero,
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-box {
+        min-height: 250px;
+    }
+}
